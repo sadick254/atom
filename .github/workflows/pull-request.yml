@@ -5,7 +5,7 @@ jobs:
     defaults:
       run:
         working-directory: script
-    runs-on: ubuntu-18.04
+    runs-on: macos-10.15
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -22,7 +22,7 @@ jobs:
     defaults:
       run:
         working-directory: script/vsts
-    runs-on: ubuntu-18.04
+    runs-on: macos-10.15
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -33,7 +33,7 @@ jobs:
         name: Getting Release Version
         run: node get-release-version.js
   Bootstrap:
-    runs-on: ubuntu-18.04
+    runs-on: macos-10.15
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -41,7 +41,7 @@ jobs:
         uses: actions/setup-node@v1
       - run: script/bootstrap
   Build:
-    runs-on: ubuntu-18.04
+    runs-on: macos-10.15
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
