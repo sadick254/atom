@@ -71,11 +71,11 @@ async function getReleaseVersion() {
   const isReleaseBranch =
     process.env.IS_RELEASE_BRANCH ||
     argv.nightly ||
-    buildBranch.match(/\d\.\d+-releases/) !== null;
+    (buildBranch && buildBranch.match(/\d\.\d+-releases/) !== null);
   const isSignedZipBranch =
     !isReleaseBranch &&
     (process.env.IS_SIGNED_ZIP_BRANCH ||
-      buildBranch.startsWith('electron-') ||
+      (buildBranch && buildBranch.startsWith('electron-')) ||
       (buildBranch === 'master' &&
         !process.env.SYSTEM_PULLREQUEST_PULLREQUESTNUMBER));
   const SHOULD_SIGN = process.env.SHOULD_SIGN;
