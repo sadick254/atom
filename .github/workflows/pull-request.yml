@@ -32,3 +32,11 @@ jobs:
       - id: release-version
         name: Getting Release Version
         run: node get-release-version.js
+  Bootstrap:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Use Node Version 12.16.3
+        uses: actions/setup-node@v1
+      - run: script/bootstrap
