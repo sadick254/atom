@@ -1,0 +1,17 @@
+name: Atom Pull Requests
+on: pull_request
+jobs:
+  Lint:
+    defaults:
+      run:
+        working-directory: script
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Use Node Version 12.16.3
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.3
+      - run: npm install
+      - run: ./lint
