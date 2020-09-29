@@ -45,6 +45,8 @@ jobs:
         run: node get-release-version.js
   Bootstrap:
     runs-on: macos-10.15
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
