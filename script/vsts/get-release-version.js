@@ -56,6 +56,8 @@ async function getReleaseVersion() {
   console.log(
     `##vso[task.setvariable variable=ReleaseVersion;isOutput=true]${releaseVersion}`
   );
+
+  console.log(`::set-output name=ReleaseVersion::${releaseVersion}`);
   if (!process.env.SYSTEM_PULLREQUEST_PULLREQUESTNUMBER) {
     // Only set the build number on non-PR builds as it causes build errors when
     // non-admins send PRs to the repo
