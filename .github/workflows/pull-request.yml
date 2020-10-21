@@ -1,0 +1,59 @@
+name: Atom Pull Requests
+on: pull_request
+jobs:
+  Lint:
+    defaults:
+      run:
+        working-directory: script
+    runs-on: macos-10.15
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Use Node Version 12.16.3
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.3
+      - run: npm install
+      - run: ./lint
+  GetReleaseVersion:
+    needs: Lint
+    outputs:
+      releaseVersion: ${{ steps.release-version.outputs.ReleaseVersion}}
+    defaults:
+      run:
+        working-directory: script/vsts
+    runs-on: macos-10.15
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Use Node Version 12.16.3
+        uses: actions/setup-node@v1
+      - run: npm install
+      - id: release-version
+        name: Getting Release Version
+        run: node get-release-version.js
+  Build:
+    runs-on: macos-10.15
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Use Node Version 12.16.3
+        uses: actions/setup-node@v1
+      - name: Get npm cache directory
+        id: npm-cache
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v2
+        id: bootstrap-cache
+        with:
+          path: ${{ steps.npm-cache.outputs.dir }}
+          key: ${{ runner.os }}-bootstrap-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-bootstrap-
+      - run: script/bootstrap
+        name: Bootstrap
+        if: steps.bootstrap-cache.outputs.cache-hit != 'true'
+      - run: script/build --no-bootstrap
+        name: Build Atom
