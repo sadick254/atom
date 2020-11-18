@@ -1,0 +1,17 @@
+name: Atom Pull Requests
+on: pull-request
+jobs:
+    Lint:
+      name: Lint Codebase
+      runs-on: ubuntu-18.04
+      defaults:
+        run:
+          shell: bash
+          working-directory: script
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v2
+        - name: Install Script Dependencies
+          run: npm install
+        - name: Linting Codebase
+          run: ./lint
