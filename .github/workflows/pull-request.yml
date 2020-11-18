@@ -39,7 +39,24 @@ jobs:
         - id: get-release-version
           name: Get Version
           run: node get-release-version.js
+<<<<<<< HEAD
 =======
         - name: Linting Codebase
           run: ./lint
 >>>>>>> ca2d79615... Add linting action
+=======
+
+    macOSBuild:
+      name: macOS Build
+      runs-on: macos-10.15
+      needs: GetReleaseVersion
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v2
+        - name: Use Node Version 12.4.0
+          uses: actions/setup-node@v2
+        - name: Bootstrap
+          run: script/bootstrap
+        - name: Build
+          run: script/build --no-bootstrap
+>>>>>>> 8c7642de2... Add macOS build job
