@@ -54,7 +54,9 @@ jobs:
         - name: Checkout Code
           uses: actions/checkout@v2
         - name: Use Node Version 12.4.0
-          uses: actions/setup-node@v2
+          uses: actions/setup-node@v2-beta
+          with:
+            node-version: '12.4.0'
         - name: Bootstrap
           run: script/bootstrap
         - name: Build
