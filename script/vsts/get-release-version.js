@@ -58,7 +58,7 @@ async function getReleaseVersion() {
   );
 
   // Set release version github action output
-  console.log(`::set-output name=releaseVersion::${releaseVersion}`)
+  console.log(`::set-output name=releaseVersion::${releaseVersion}`);
 
   if (!process.env.SYSTEM_PULLREQUEST_PULLREQUESTNUMBER) {
     // Only set the build number on non-PR builds as it causes build errors when
