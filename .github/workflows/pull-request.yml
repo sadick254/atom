@@ -1,9 +1,5 @@
 name: Atom Pull Requests
-<<<<<<< HEAD
 on: pull_request
-=======
-on: pull-request
->>>>>>> ca2d79615... Add linting action
 jobs:
     Lint:
       name: Lint Codebase
@@ -17,7 +13,6 @@ jobs:
           uses: actions/checkout@v2
         - name: Install Script Dependencies
           run: npm install
-<<<<<<< HEAD
         - name: Linting
           run: ./lint
 
@@ -39,12 +34,6 @@ jobs:
         - id: get-release-version
           name: Get Version
           run: node get-release-version.js
-<<<<<<< HEAD
-=======
-        - name: Linting Codebase
-          run: ./lint
->>>>>>> ca2d79615... Add linting action
-=======
 
     macOSBuild:
       name: macOS Build
@@ -61,4 +50,3 @@ jobs:
           run: script/bootstrap
         - name: Build
           run: script/build --no-bootstrap
->>>>>>> 8c7642de2... Add macOS build job
